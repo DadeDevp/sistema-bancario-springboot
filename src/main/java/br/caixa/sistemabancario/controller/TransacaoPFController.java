@@ -1,6 +1,7 @@
 package br.caixa.sistemabancario.controller;
 
 import br.caixa.sistemabancario.dto.Transacao.DepositoRequestDTO;
+import br.caixa.sistemabancario.dto.Transacao.InvestimentoPFRequestDTO;
 import br.caixa.sistemabancario.dto.Transacao.SaqueRequestDTO;
 import br.caixa.sistemabancario.dto.Transacao.TransferenciaRequestDTO;
 import br.caixa.sistemabancario.service.TransacaoPFService;
@@ -35,5 +36,10 @@ public class TransacaoPFController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/investimento")
+    public ResponseEntity investir(@RequestBody InvestimentoPFRequestDTO investimentoPFRequestDTO){
+        transacaoPFService.investir(investimentoPFRequestDTO);
+        return ResponseEntity.ok().build();
+    }
 
 }
