@@ -1,0 +1,820 @@
+{
+	"info": {
+		"_postman_id": "af1f4f84-4934-48fe-bdfc-4967eb1bc243",
+		"name": "SistemaBancario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27780006"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Logar como OPERATOR",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"joao@gmail.com\",\r\n    \"senha\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logar como VIEWER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"maria@gmail.com\",\r\n    \"senha\": \"6789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "ClientePF",
+					"item": [
+						{
+							"name": "Inserir",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVklFV0VSIiwiUk9MRV9PUEVSQVRPUiJdLCJpYXQiOjE3MTY0MTExNzMsImV4cCI6MTcxNjQxMjk3M30.G9QkBVX7qxbY7XRVSa5sR_7CmWslRhFSVEAIqltgcasxsdYYFcJARmJATGyGGmvDiFSBKUcKJ4Y2c86i_Eqxuw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVklFV0VSIiwiUk9MRV9PUEVSQVRPUiJdLCJpYXQiOjE3MTY0MDQ4NzYsImV4cCI6MTcxNjQwNjY3Nn0.cjKaihek-AD5q8dbLWufXG8aMmj-j8xIs9eKVia9VuEBuUXnboVQKJRdOA0zALtLLytptEheHbdX5oLEqO8lGw",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"david\",\r\n    \"cpf\": \"51701034093\",\r\n    \"dataNascimento\": \"1989-11-09\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/clientes/pf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pf"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"david pires\",\r\n  \"status\": \"INATIVO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/clientes/pf/1234",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pf",
+										"1234"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Por Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVklFV0VSIiwiUk9MRV9PUEVSQVRPUiJdLCJpYXQiOjE3MTY0MTAzNzYsImV4cCI6MTcxNjQxMjE3Nn0.3u7s6NEk8OHhMsOmtGeS-SByRqELgZIpNm5PJfocVXT0b3Df4yHdrLP-pS8b50r0T_zUkrKTh5p4Le6EgogmIw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/clientes/pf/51701034093",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pf",
+										"51701034093"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJpYUBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX1ZJRVdFUiJdLCJpYXQiOjE3MTY0MTAyMjQsImV4cCI6MTcxNjQxMjAyNH0.14K5TfovS8ItSFlyR-QLfZ5jp4JNi8hmlGJySOXeYRVta39HabeHoVoPU5TQZta0yeZe7j6_DgshHSEBExU-oA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/clientes/pf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pf"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluir",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/clientes/pf/1234",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pf",
+										"1234"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ClientePJ",
+					"item": [
+						{
+							"name": "Inserir",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJpYUBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX1ZJRVdFUiJdLCJpYXQiOjE3MTY0MTAyMjQsImV4cCI6MTcxNjQxMjAyNH0.14K5TfovS8ItSFlyR-QLfZ5jp4JNi8hmlGJySOXeYRVta39HabeHoVoPU5TQZta0yeZe7j6_DgshHSEBExU-oA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"david\",\r\n  \"cnpj\": \"80259387000134\",\r\n  \"razaoSocial\": \"david ltda\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/clientes/pj",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pj"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"david\",\r\n  \"cnpj\": \"1234\",\r\n  \"razaoSocial\": \"david ltda\",\r\n  \"status\": \"INATIVO\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/clientes/pj/1234",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pj",
+										"1234"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Por Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/clientes/pj/1234",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pj",
+										"1234"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/clientes/pj",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pj"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluir",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/clientes/pj/80259387000134",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"clientes",
+										"pj",
+										"80259387000134"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Conta",
+			"item": [
+				{
+					"name": "Criar Conta Corrente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"documento\": \"58492008008\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/contas/contacorrente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contas",
+								"contacorrente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Conta Poupanca",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"documento\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/contas/contapoupanca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contas",
+								"contapoupanca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar conta por numero",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJpYUBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX1ZJRVdFUiJdLCJpYXQiOjE3MTYzNTM2ODAsImV4cCI6MTcxNjM1NTQ4MH0.fWGhuul8gWcevfbY__vTnUATmc19vBs7ZNxLcMW2GghZ6bx62sUFHdBfTbfw0QS7hde-AT3i_g_oUwpnxyAq3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/contas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transacoes",
+			"item": [
+				{
+					"name": "TransacaoPF",
+					"item": [
+						{
+							"name": "Sacar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVklFV0VSIiwiUk9MRV9PUEVSQVRPUiJdLCJpYXQiOjE3MTY0MDQ3NDIsImV4cCI6MTcxNjQwNjU0Mn0.V_qlMgyc2RvNVOEil39LiEyah7-9KxYtmLdCpria9VpNsdVp-4TjNuTvcY_0HSGIlO_ILWghrbDBaK9j_nfvLQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numeroConta\" : 1,\r\n    \"valor\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/transacoes/pf/saque",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"transacoes",
+										"pf",
+										"saque"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Depositar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfT1BFUkFUT1IiLCJST0xFX1ZJRVdFUiJdLCJpYXQiOjE3MTY0MDUzMDQsImV4cCI6MTcxNjQwNzEwNH0.Gh4rG7Twcf4boX9AvMMwIXySQWdcQMsp6AH8uvJ0YHNdDs8JN1Uqmk15_DB2qVY3dK1R8E9PTlN6SpIxq184gQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numeroConta\" : 1,\r\n    \"valor\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/transacoes/pf/deposito",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"transacoes",
+										"pf",
+										"deposito"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transferir",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numeroContaOrigem\" : 1,\r\n    \"numeroContadestino\" : 3,\r\n    \"valor\": 50\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/transacoes/pf/transferencia",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"transacoes",
+										"pf",
+										"transferencia"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Investir",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cpf\" : 80259387000134,\r\n    \"valor\": 50\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/transacoes/pf/investimento",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"transacoes",
+										"pf",
+										"investimento"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TransacaoPJ",
+					"item": [
+						{
+							"name": "Sacar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJpYUBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX1ZJRVdFUiJdLCJpYXQiOjE3MTY0MDUxOTAsImV4cCI6MTcxNjQwNjk5MH0.HhcKDnPVEk3m6g2HFodHc0NzFDu214f0kyKZ3EJmISgF1MMo_VTR5sP-fwvnuuwizjh6GSCEfCF_XnWCXGRhgA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numeroConta\" : 1,\r\n    \"valor\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/transacoes/pj/saque",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"transacoes",
+										"pj",
+										"saque"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Depositar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfT1BFUkFUT1IiLCJST0xFX1ZJRVdFUiJdLCJpYXQiOjE3MTY0MDUzMDQsImV4cCI6MTcxNjQwNzEwNH0.Gh4rG7Twcf4boX9AvMMwIXySQWdcQMsp6AH8uvJ0YHNdDs8JN1Uqmk15_DB2qVY3dK1R8E9PTlN6SpIxq184gQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numeroConta\" : 1,\r\n    \"valor\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/transacoes/pj/deposito",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"transacoes",
+										"pj",
+										"deposito"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transferir",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numeroContaOrigem\" : 1,\r\n    \"numeroContadestino\" : 2,\r\n    \"valor\": 50\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/transacoes/pj/transferencia",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"transacoes",
+										"pj",
+										"transferencia"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Investir",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"clienteId\" : 51701034093,\r\n    \"valor\": 50\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/transacoes/pj/investimento",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"transacoes",
+										"pj",
+										"investimento"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Arquivo",
+			"item": [
+				{
+					"name": "Criar contas pelo Arquivo CSV",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVklFV0VSIiwiUk9MRV9PUEVSQVRPUiJdLCJpYXQiOjE3MTY0MDM2MTUsImV4cCI6MTcxNjQwNTQxNX0.0FYxHoPGkYoLhPxnz6YdWzxzItSKNCJcUF2M0a9xUvj-GmHmNRvlU6ep9U9Cj1gdAhbhYdA1TbGuO0dy5H1ZMg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/David/Downloads/pessoas.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/arquivos/csv",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"arquivos",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
