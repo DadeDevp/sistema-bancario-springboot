@@ -12,12 +12,12 @@ import java.time.LocalDate;
 @Data
 public class ClientePFRequestDTO {
 
-    @NotBlank
+    @NotBlank(message = "O nome é obrigatório")
     private String nome;
     @CPF
     private String cpf;
-    @NotNull
-    @Past
+    @NotNull(message = "A data de nascimento é obrigatória")
+    @Past(message = "A data de nascimento tem que anterior a data atual")
     private LocalDate dataNascimento;
 
     private StatusClienteEnum status;

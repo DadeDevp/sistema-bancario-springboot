@@ -7,11 +7,11 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 @Data
 public class ClientePJRequestDTO {
-    @NotBlank
+    @NotBlank(message = "O nome é obrigatório")
     private String nome;
     @CNPJ
     private String cnpj;
-    @NotBlank
+    @NotBlank(message = "A razao social é obrigatória")
     private String razaoSocial;
 
     private StatusClienteEnum status;

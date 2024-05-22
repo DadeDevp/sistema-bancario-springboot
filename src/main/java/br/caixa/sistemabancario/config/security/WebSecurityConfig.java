@@ -56,7 +56,7 @@ public class WebSecurityConfig {
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/**")).hasRole("OPERATOR")
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/**")).hasRole("OPERATOR")
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/**")).hasRole("OPERATOR")
-                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/**")).hasAnyRole("VIEWER")
+                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/**")).hasAnyRole("VIEWER","OPERATOR")
                             .anyRequest().authenticated();
                 })
                 .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // h2-console

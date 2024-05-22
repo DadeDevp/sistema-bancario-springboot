@@ -43,26 +43,14 @@ public class AppConfiguration {
         modelMapper.typeMap(ClientePJRequestDTO.class, ClientePJ.class)
                 .addMapping(ClientePJRequestDTO::getCnpj, ClientePJ::setId);
 
-//        modelMapper.typeMap(ClientePF.class, ClienteArquivoDTO.class)
-//                .addMapping(ClientePF::getCpf, ClienteArquivoDTO::setDocumento)
-//                .addMapping(clientePF -> "PF", ClienteArquivoDTO::setTipo)
-//                .addMapping(clientePF -> clientePF.getContas() != null && !clientePF.getContas().isEmpty() ? clientePF.getContas().get(0).getNumero() : null, ClienteArquivoDTO::setNumeroConta)
-//                .addMapping(clientePF -> clientePF.getContas() != null && !clientePF.getContas().isEmpty() ? clientePF.getContas().get(0).getSaldo() : null, ClienteArquivoDTO::setSaldoConta);
-//
-//        modelMapper.typeMap(ClientePJ.class, ClienteArquivoDTO.class)
-//                .addMapping(ClientePJ::getCnpj, ClienteArquivoDTO::setDocumento)
-//                .addMapping(clientePJ -> "PJ", ClienteArquivoDTO::setTipo)
-//                .addMapping(clientePJ -> clientePJ.getContas() != null && !clientePJ.getContas().isEmpty() ? clientePJ.getContas().get(0).getNumero() : null, ClienteArquivoDTO::setNumeroConta)
-//                .addMapping(clientePJ -> clientePJ.getContas() != null && !clientePJ.getContas().isEmpty() ? clientePJ.getContas().get(0).getSaldo() : null, ClienteArquivoDTO::setSaldoConta);
-
-
         return modelMapper;
     }
 
     @PostConstruct
     public void criarAgentes() {
         Agente agenteOperator = new Agente(null, "Joao", "joao@gmail.com", passwordEncoder.encode("12345"));
-        agenteOperator.getRoles().addAll(Arrays.asList(RoleEnum.ROLE_OPERATOR, RoleEnum.ROLE_VIEWER));
+        agenteOperator.getRoles().add(RoleEnum.ROLE_OPERATOR);
+        agenteOperator.getRoles().add(RoleEnum.ROLE_VIEWER);
 
         Agente agenteViewer = new Agente(null, "Maria", "maria@gmail.com", passwordEncoder.encode("6789"));
         agenteViewer.getRoles().add(RoleEnum.ROLE_VIEWER);

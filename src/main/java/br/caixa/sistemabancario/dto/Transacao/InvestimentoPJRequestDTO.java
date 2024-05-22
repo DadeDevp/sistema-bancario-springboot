@@ -12,6 +12,6 @@ import java.math.BigDecimal;
 public class InvestimentoPJRequestDTO {
     @CNPJ
     private String cnpj;
-    @NotNull
+    @NotNull(message = "O valor é obrigatório")
     private BigDecimal valor;
 }

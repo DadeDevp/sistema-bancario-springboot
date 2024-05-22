@@ -12,6 +12,6 @@ import java.math.BigDecimal;
 public class InvestimentoPFRequestDTO {
     @CPF
     private String cpf;
-    @NotNull
+    @NotNull(message = "O valor é obrigatório")
     private BigDecimal valor;
 }
