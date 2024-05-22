@@ -52,7 +52,7 @@ public class WebSecurityConfig {
                                     AntPathRequestMatcher.antMatcher("/swagger-ui.html"),
                                     AntPathRequestMatcher.antMatcher("/v3/**"),
                                     AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                            .requestMatchers(AntPathRequestMatcher.antMatcher("/arquivos/csv")).permitAll()
+                            // .requestMatchers(AntPathRequestMatcher.antMatcher("/arquivos/csv")).permitAll()
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/**")).hasRole("OPERATOR")
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/**")).hasRole("OPERATOR")
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/**")).hasRole("OPERATOR")

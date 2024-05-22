@@ -31,18 +31,10 @@ public class ContaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(contaResponseDTO);
     }
 
-    @PostMapping("/containvestimento")
-    public ResponseEntity<ContaResponseDTO> criarContaInvestimento(@RequestBody ContaRequestDTO contaRequestDTO){
-        ContaResponseDTO contaResponseDTO = contaService.criarContaInvestimento(contaRequestDTO.getDocumento());
-        return ResponseEntity.status(HttpStatus.CREATED).body(contaResponseDTO);
-    }
-
     @GetMapping("/{numeroConta}")
     public ResponseEntity<ContaResponseDTO> consultarContaPorNumero(@PathVariable Integer numeroConta) {
         ContaResponseDTO contaResponseDTO = contaService.buscarContaPorNumero(numeroConta);
         return ResponseEntity.ok(contaResponseDTO);
     }
-
-
 
 }

@@ -5,6 +5,7 @@ import br.caixa.sistemabancario.dto.Transacao.InvestimentoPFRequestDTO;
 import br.caixa.sistemabancario.dto.Transacao.SaqueRequestDTO;
 import br.caixa.sistemabancario.dto.Transacao.TransferenciaRequestDTO;
 import br.caixa.sistemabancario.entity.Cliente;
+import br.caixa.sistemabancario.entity.ClientePF;
 import br.caixa.sistemabancario.entity.Conta;
 import br.caixa.sistemabancario.entity.ContaInvestimento;
 import br.caixa.sistemabancario.exceptions.ValidacaoException;
@@ -35,6 +36,9 @@ public class TransacaoPFService {
     
     public void depositar(DepositoRequestDTO depositoRequestDto) {
         Conta conta = findContaById(depositoRequestDto.getNumeroConta());
+        if (!isClientePF(conta)) {
+            throw new ValidacaoException("O cliente deve ser PF", HttpStatus.BAD_REQUEST);
+        }
         conta.setSaldo(conta.getSaldo().add(depositoRequestDto.getValor()));
         contaRepository.save(conta);
     }
@@ -42,6 +46,10 @@ public class TransacaoPFService {
     
     public void sacar(SaqueRequestDTO saqueRequestDTO) {
         Conta conta = findContaById(saqueRequestDTO.getNumeroConta());
+
+        if (!isClientePF(conta)) {
+            throw new ValidacaoException("O cliente deve ser PF", HttpStatus.BAD_REQUEST);
+        }
 
         verificarSaldo(conta.getSaldo(), saqueRequestDTO.getValor());
 
@@ -51,8 +59,14 @@ public class TransacaoPFService {
 
     public void transferir(TransferenciaRequestDTO transferenciaRequestDTO) {
 
+
         //Pesquisa a conta origem e seu saldo
         Conta contaOrigem = findContaById(transferenciaRequestDTO.getNumeroContaOrigem());
+
+        if (!isClientePF(contaOrigem)) {
+            throw new ValidacaoException("O cliente deve ser PF", HttpStatus.BAD_REQUEST);
+        }
+
         verificarSaldo(contaOrigem.getSaldo(), transferenciaRequestDTO.getValor());
 
         //Pesquisa conta destino
@@ -71,16 +85,24 @@ public class TransacaoPFService {
 
     public void investir(InvestimentoPFRequestDTO investimentoPFRequestDTO) {
         Cliente cliente = clienteRepository.findById(investimentoPFRequestDTO.getCpf()).orElseThrow(() -> new ValidacaoException("Cliente não encontrado", HttpStatus.BAD_REQUEST));
-        Conta confInvestimento = cliente.getContas().stream().filter(c -> c instanceof ContaInvestimento).findFirst().orElse(criarContaInvestiment(cliente));
+        Conta contaInvestimento = cliente.getContas().stream().filter(c -> c instanceof ContaInvestimento).findFirst().orElse(criarContaInvestimento(cliente));
+
+        if (!isClientePF(contaInvestimento)) {
+            throw new ValidacaoException("O cliente deve ser PF", HttpStatus.BAD_REQUEST);
+        }
 
         BigDecimal valor = investimentoPFRequestDTO.getValor().multiply(RENDIMENTO_INVESTIMENTO);
-        confInvestimento.setSaldo(confInvestimento.getSaldo().add(valor));
+        contaInvestimento.setSaldo(contaInvestimento.getSaldo().add(valor));
 
-        contaRepository.save(confInvestimento);
+        contaRepository.save(contaInvestimento);
     }
 
     private Conta findContaById(Long id) {
         return contaRepository.findById(id).orElseThrow(() -> new ValidacaoException("Conta de numero " + id + " nao encontrada", HttpStatus.NOT_FOUND));
+    }
+
+    private boolean isClientePF(Conta conta){
+        return conta.getCliente() instanceof ClientePF;
     }
 
     private void verificarSaldo(BigDecimal valorSaldoAtual, BigDecimal valorDebito) {
@@ -89,7 +111,7 @@ public class TransacaoPFService {
         }
     }
 
-    private Conta criarContaInvestiment(Cliente cliente) {
+    private Conta criarContaInvestimento(Cliente cliente) {
         ContaInvestimento contaInvestimento = new ContaInvestimento(cliente);
         contaInvestimento.setSaldo(BigDecimal.ZERO);
         contaInvestimento.setDataCriacao(LocalDate.now());

@@ -37,6 +37,4 @@ public class TransacaoPJController {
         transacaoPJService.transferir(transferenciaRequestDTO);
         return ResponseEntity.ok().build();
     }
-
-
 }

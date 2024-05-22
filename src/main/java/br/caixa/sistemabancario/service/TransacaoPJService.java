@@ -1,7 +1,11 @@
 package br.caixa.sistemabancario.service;
 
-import br.caixa.sistemabancario.dto.Transacao.*;
+import br.caixa.sistemabancario.dto.Transacao.DepositoRequestDTO;
+import br.caixa.sistemabancario.dto.Transacao.InvestimentoPJRequestDTO;
+import br.caixa.sistemabancario.dto.Transacao.SaqueRequestDTO;
+import br.caixa.sistemabancario.dto.Transacao.TransferenciaRequestDTO;
 import br.caixa.sistemabancario.entity.Cliente;
+import br.caixa.sistemabancario.entity.ClientePJ;
 import br.caixa.sistemabancario.entity.Conta;
 import br.caixa.sistemabancario.entity.ContaInvestimento;
 import br.caixa.sistemabancario.exceptions.ValidacaoException;
@@ -32,6 +36,11 @@ public class TransacaoPJService {
 
     public void depositar(DepositoRequestDTO depositoRequestDto) {
         Conta conta = findContaById(depositoRequestDto.getNumeroConta());
+
+        if (!isClientePJ(conta)) {
+            throw new ValidacaoException("O cliente deve ser PJ", HttpStatus.BAD_REQUEST);
+        }
+
         conta.setSaldo(conta.getSaldo().add(depositoRequestDto.getValor()));
         contaRepository.save(conta);
     }
@@ -39,6 +48,10 @@ public class TransacaoPJService {
 
     public void sacar(SaqueRequestDTO saqueRequestDTO) {
         Conta conta = findContaById(saqueRequestDTO.getNumeroConta());
+
+        if (!isClientePJ(conta)) {
+            throw new ValidacaoException("O cliente deve ser PJ", HttpStatus.BAD_REQUEST);
+        }
 
         verificarSaldo(conta.getSaldo(), saqueRequestDTO.getValor());
 
@@ -49,8 +62,12 @@ public class TransacaoPJService {
 
     public void transferir(TransferenciaRequestDTO transferenciaRequestDTO) {
 
-        //Pesquisa a conta origem e seu saldo
+        //Pesquisa a conta origem
         Conta contaOrigem = findContaById(transferenciaRequestDTO.getNumeroContaOrigem());
+
+        if (!isClientePJ(contaOrigem)) {
+            throw new ValidacaoException("O cliente deve ser PJ", HttpStatus.BAD_REQUEST);
+        }
         verificarSaldo(contaOrigem.getSaldo(), transferenciaRequestDTO.getValor());
 
         //Pesquisa conta destino
@@ -72,6 +89,10 @@ public class TransacaoPJService {
         Cliente cliente = clienteRepository.findById(investimentoPJRequestDTO.getCnpj()).orElseThrow(() -> new ValidacaoException("Cliente não encontrado",HttpStatus.BAD_REQUEST));
         Conta contaInvestimento = cliente.getContas().stream().filter(c -> c instanceof ContaInvestimento).findFirst().orElse(criarContaInvestiment(cliente));
 
+        if (!isClientePJ(contaInvestimento)) {
+            throw new ValidacaoException("O cliente deve ser PJ", HttpStatus.BAD_REQUEST);
+        }
+
         BigDecimal valor = investimentoPJRequestDTO.getValor().multiply(RENDIMENTO_INVESTIMENTO);
         contaInvestimento.setSaldo(contaInvestimento.getSaldo().add(valor));
 
@@ -80,6 +101,10 @@ public class TransacaoPJService {
 
     private Conta findContaById(Long id ){
         return contaRepository.findById(id).orElseThrow(() -> new ValidacaoException("Conta de numero " + id + " nao encontrada" , HttpStatus.NOT_FOUND));
+    }
+
+    private boolean isClientePJ(Conta conta){
+        return conta.getCliente() instanceof ClientePJ;
     }
 
     private void verificarSaldo(BigDecimal valorSaldoAtual, BigDecimal valorDebito){
