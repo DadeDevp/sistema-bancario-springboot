@@ -1,5 +1,6 @@
 package br.caixa.sistemabancario.config;
 
+import br.caixa.sistemabancario.dto.Cliente.ClienteArquivoDTO;
 import br.caixa.sistemabancario.dto.Cliente.ClientePJRequestDTO;
 import br.caixa.sistemabancario.dto.Conta.ContaResponseDTO;
 import br.caixa.sistemabancario.dto.Cliente.ClientePFRequestDTO;
@@ -41,6 +42,18 @@ public class AppConfiguration {
 
         modelMapper.typeMap(ClientePJRequestDTO.class, ClientePJ.class)
                 .addMapping(ClientePJRequestDTO::getCnpj, ClientePJ::setId);
+
+//        modelMapper.typeMap(ClientePF.class, ClienteArquivoDTO.class)
+//                .addMapping(ClientePF::getCpf, ClienteArquivoDTO::setDocumento)
+//                .addMapping(clientePF -> "PF", ClienteArquivoDTO::setTipo)
+//                .addMapping(clientePF -> clientePF.getContas() != null && !clientePF.getContas().isEmpty() ? clientePF.getContas().get(0).getNumero() : null, ClienteArquivoDTO::setNumeroConta)
+//                .addMapping(clientePF -> clientePF.getContas() != null && !clientePF.getContas().isEmpty() ? clientePF.getContas().get(0).getSaldo() : null, ClienteArquivoDTO::setSaldoConta);
+//
+//        modelMapper.typeMap(ClientePJ.class, ClienteArquivoDTO.class)
+//                .addMapping(ClientePJ::getCnpj, ClienteArquivoDTO::setDocumento)
+//                .addMapping(clientePJ -> "PJ", ClienteArquivoDTO::setTipo)
+//                .addMapping(clientePJ -> clientePJ.getContas() != null && !clientePJ.getContas().isEmpty() ? clientePJ.getContas().get(0).getNumero() : null, ClienteArquivoDTO::setNumeroConta)
+//                .addMapping(clientePJ -> clientePJ.getContas() != null && !clientePJ.getContas().isEmpty() ? clientePJ.getContas().get(0).getSaldo() : null, ClienteArquivoDTO::setSaldoConta);
 
 
         return modelMapper;

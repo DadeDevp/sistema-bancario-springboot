@@ -3,7 +3,9 @@ package br.caixa.sistemabancario.entity;
 import br.caixa.sistemabancario.entity.enums.StatusClienteEnum;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

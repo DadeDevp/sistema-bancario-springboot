@@ -3,9 +3,11 @@ package br.caixa.sistemabancario.controller;
 import br.caixa.sistemabancario.dto.Conta.ContaResponseDTO;
 import br.caixa.sistemabancario.dto.Conta.ContaRequestDTO;
 import br.caixa.sistemabancario.service.ContaService;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/contas")
@@ -35,12 +37,12 @@ public class ContaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(contaResponseDTO);
     }
 
-
-
     @GetMapping("/{numeroConta}")
     public ResponseEntity<ContaResponseDTO> consultarContaPorNumero(@PathVariable Integer numeroConta) {
         ContaResponseDTO contaResponseDTO = contaService.buscarContaPorNumero(numeroConta);
         return ResponseEntity.ok(contaResponseDTO);
     }
+
+
 
 }

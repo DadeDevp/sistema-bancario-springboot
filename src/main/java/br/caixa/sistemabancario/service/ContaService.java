@@ -5,11 +5,19 @@ import br.caixa.sistemabancario.entity.*;
 import br.caixa.sistemabancario.exceptions.ValidacaoException;
 import br.caixa.sistemabancario.repository.ClienteRepository;
 import br.caixa.sistemabancario.repository.ContaRepository;
+import jakarta.persistence.DiscriminatorValue;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 
 @Service
@@ -67,6 +75,9 @@ public class ContaService {
 
     public ContaResponseDTO buscarContaPorNumero(Integer numeroConta) {
         Conta conta = contaRepository.findById(Long.valueOf(numeroConta)).orElseThrow(() -> new ValidacaoException("Conta nao encontrada", HttpStatus.NOT_FOUND));
+        System.out.println(conta.getClass().getAnnotation(DiscriminatorValue.class).value());
         return modelMapper.map(conta, ContaResponseDTO.class);
     }
+
+
 }

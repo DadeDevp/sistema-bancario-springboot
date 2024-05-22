@@ -17,10 +17,6 @@ import java.util.Random;
 @Entity
 public abstract class Conta {
 
-    @Enumerated(EnumType.STRING)
-    @Setter(AccessLevel.NONE)
-    protected TipoContaEnum tipoConta;
-
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long numero;
@@ -31,6 +27,10 @@ public abstract class Conta {
     @JoinColumn(name = "cliente_id")
     @JsonBackReference
     private Cliente cliente;
+
+    @Enumerated(EnumType.STRING)
+    @Setter(AccessLevel.NONE)
+    protected TipoContaEnum tipoConta;
 
     public Conta(Cliente cliente) {
         this.cliente = cliente;

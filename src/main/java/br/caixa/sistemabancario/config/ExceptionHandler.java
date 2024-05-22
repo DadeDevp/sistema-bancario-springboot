@@ -11,8 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.time.Instant;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ExceptionHandler {
@@ -46,7 +44,10 @@ public class ExceptionHandler {
     public ResponseEntity<ErroPadrao> genericException(Exception e, HttpServletRequest request) {
 
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        ErroPadrao err = new ErroPadrao(Instant.now(), status.toString(),   e.getMessage(), request.getRequestURI());
+        String message = "Erro no procesamento no servidor!";
+        ErroPadrao err = new ErroPadrao(Instant.now(), status.toString(),   message, request.getRequestURI());
+
+        System.out.println(e.getMessage());
 
         return ResponseEntity.status(status).body(err);
     }

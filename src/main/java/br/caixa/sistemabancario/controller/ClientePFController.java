@@ -2,11 +2,14 @@ package br.caixa.sistemabancario.controller;
 
 import br.caixa.sistemabancario.dto.Cliente.ClientePFRequestDTO;
 import br.caixa.sistemabancario.dto.Cliente.ClientePFResponseDTO;
+import br.caixa.sistemabancario.service.ArquivoService;
 import br.caixa.sistemabancario.service.ClientePFService;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,6 +18,7 @@ import java.util.List;
 public class ClientePFController {
 
     final private ClientePFService clientePFService;
+
 
     public ClientePFController(ClientePFService clientePFService) {
         this.clientePFService = clientePFService;
@@ -49,5 +53,6 @@ public class ClientePFController {
     public ResponseEntity<List<ClientePFResponseDTO>> buscarTodosClientesPF(){
         return ResponseEntity.ok(clientePFService.buscarTodosClientesPF());
     }
+
 
 }
