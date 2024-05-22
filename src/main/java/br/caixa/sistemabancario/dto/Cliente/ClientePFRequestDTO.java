@@ -15,6 +15,7 @@ public class ClientePFRequestDTO {
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
     @CPF
+    @NotBlank(message = "O CPF é obrigatório")
     private String cpf;
     @NotNull(message = "A data de nascimento é obrigatória")
     @Past(message = "A data de nascimento tem que anterior a data atual")

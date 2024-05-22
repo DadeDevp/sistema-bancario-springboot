@@ -10,6 +10,7 @@ public class ClientePJRequestDTO {
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
     @CNPJ
+    @NotBlank(message = "O CNPJ é obrigatório")
     private String cnpj;
     @NotBlank(message = "A razao social é obrigatória")
     private String razaoSocial;

@@ -50,7 +50,6 @@ public class AppConfiguration {
     public void criarAgentes() {
         Agente agenteOperator = new Agente(null, "Joao", "joao@gmail.com", passwordEncoder.encode("12345"));
         agenteOperator.getRoles().add(RoleEnum.ROLE_OPERATOR);
-        agenteOperator.getRoles().add(RoleEnum.ROLE_VIEWER);
 
         Agente agenteViewer = new Agente(null, "Maria", "maria@gmail.com", passwordEncoder.encode("6789"));
         agenteViewer.getRoles().add(RoleEnum.ROLE_VIEWER);

@@ -53,10 +53,10 @@ public class WebSecurityConfig {
                                     AntPathRequestMatcher.antMatcher("/v3/**"),
                                     AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                             // .requestMatchers(AntPathRequestMatcher.antMatcher("/arquivos/csv")).permitAll()
-                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/**")).hasRole("OPERATOR")
-                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/**")).hasRole("OPERATOR")
-                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/**")).hasRole("OPERATOR")
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/**")).hasAnyRole("VIEWER","OPERATOR")
+                            .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("OPERATOR")
+//                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/**")).hasRole("OPERATOR")
+//                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/**")).hasRole("OPERATOR")
                             .anyRequest().authenticated();
                 })
                 .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // h2-console
